@@ -33,4 +33,5 @@ jobs:
           pwd
           ls -lrt
           python script.py
-
+      - name: Run pytest
+        run: pytest
