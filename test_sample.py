@@ -8,4 +8,4 @@ def test_multiply():
     assert 2 * 2 == 4
 
 def test_division():
-    assert 12 - 4 == 3
+    assert 12 / 4 == 3
