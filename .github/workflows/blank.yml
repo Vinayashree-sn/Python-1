@@ -31,8 +31,6 @@ jobs:
           python -c "print('Hello from GitHub Actions!')"
       - name: Run Python script file
         run: |
-          pwd
-          ls -lrt
-          python script.py
+        
       - name: Run pytest
         run: pytest 
