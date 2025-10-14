@@ -1,9 +1,9 @@
-name: Concurrent Workflow Example
+name: Concurrent Workflow Example1
 
 on:
   push:
     branches:
-     - vinayashree
+     - main
 
 jobs:
   test:
