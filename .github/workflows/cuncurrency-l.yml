@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: [3.8, 3.9, 3.10]
+        python-version: [3.9, 3.10]
       fail-fast: false
     steps:
       - name: Checkout code
@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: |
           echo "Building project..."
-          # Simulate build
+         
           sleep 10
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       - name: Deploy
         run: |
           echo "Deploying project..."
-          # Simulate deployment
+         
           sleep 5
