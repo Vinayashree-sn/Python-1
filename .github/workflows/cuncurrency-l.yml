@@ -2,8 +2,7 @@ name: Concurrent CI Pipeline37
 
 on:
   push:
-    branches:
-      - vinayashree
+    branches: [main]
 
 concurrency:
   group: ci-${{ github.workflow }}
