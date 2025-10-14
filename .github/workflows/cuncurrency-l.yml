@@ -1,51 +1,71 @@
-name: Concurrent Workflow Example
+name: Concurrent CI Pipeline
 
 on:
   push:
-    branches: 
+    branches:
      - vinayashree
-jobs:
-  test:
-    name: Run Tests Concurrently
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: [3.9.18, 3.10.13]
-      fail-fast: false
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run linter
+        run: |
+          echo "Running linter..."
+          sleep 5  # Simulate linting
+          echo "Linting complete."
+
+  unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: 3.11
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Run tests
+        run: |
+          echo "Running unit tests..."
+          sleep 10  # Simulate testing
+          echo "Tests complete."
 
   build:
-    name: Build Project
-    runs-on: ubuntu-latest
-    needs: test
+    name: Build Application
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Build
         run: |
-          echo "Building project..."
-         
-          sleep 10
+          echo "Building application..."
+          sleep 8  # Simulate build
+          echo "Build complete."
+
+  package:
+    name: Package Artifacts
+    runs-on: ubuntu-22.04
+    needs: [lint, unit-tests, build]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package
+        run: |
+          echo "Packaging artifacts..."
+          sleep 6  # Simulate packaging
+          echo "Packaging complete."
 
   deploy:
-    name: Deploy Project
-    runs-on: ubuntu-latest
-    needs: build
+    name: Deploy to Staging
+    runs-on: ubuntu-22.04
+    needs: package
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Deploy
         run: |
-          echo "Deploying project..."
-         
-          sleep 5
+          echo "Deploying to staging..."
+          sleep 5  # Simulate deployment
+          echo "Deployment complete."
