@@ -2,10 +2,11 @@ name: Concurrent CI Pipeline39
 
 on:
   push:
-    branches: [main]
+    branches: 
+     - vinayashree
 
-concurrency:
-  group: ci-${{ github.workflow }}
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
