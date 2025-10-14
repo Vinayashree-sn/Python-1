@@ -1,4 +1,4 @@
- name: Daily Scheduled Workflow
+name: Daily Scheduled Workflow
 
 on:
   push:
