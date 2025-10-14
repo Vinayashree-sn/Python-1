@@ -1,4 +1,4 @@
-name: Concurrent Workflow Example1
+name: Concurrent Workflow Example2
 
 on:
  workflow_dispatch:
