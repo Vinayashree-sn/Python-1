@@ -17,23 +17,7 @@ jobs:
           sleep 5  # Simulate linting
           echo "Linting complete."
 
-  unit-tests:
-    name: Run Unit Tests
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.11
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-      - name: Run tests
-        run: |
-          echo "Running unit tests..."
-          sleep 10  # Simulate testing
-          echo "Tests complete."
+
 
   build:
     name: Build Application
@@ -49,7 +33,7 @@ jobs:
   package:
     name: Package Artifacts
     runs-on: ubuntu-22.04
-    needs: [lint, unit-tests, build]
+    needs: [lint, build]
     steps:
       - uses: actions/checkout@v4
       - name: Package
