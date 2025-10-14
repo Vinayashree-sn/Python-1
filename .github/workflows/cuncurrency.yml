@@ -1,20 +1,21 @@
-name: Build and Deploy
+ name: Daily Scheduled Workflow
 
 on:
   push:
     branches:
-      - main
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+      - vinayashree
+  schedule:
+    - cron: '30 3 * * *'
 
 jobs:
-  build:
+  run-daily-task:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
-      - name: Run build
-        run: echo "Building project..."
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run a sample task
+        run: echo "Good morning! This workflow runs daily at 9 AM IST."
+
+
