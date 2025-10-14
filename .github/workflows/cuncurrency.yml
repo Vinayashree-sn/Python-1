@@ -1,9 +1,7 @@
 name: Concurrent Workflow Example1
 
 on:
-  push:
-    branches:
-     - main
+ workflow_dispatch:
 
 jobs:
   test:
