@@ -1,4 +1,4 @@
-name: Build and Deploy-v
+name: Build and Deploy-vin
 
 on:
   push:
