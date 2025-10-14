@@ -3,7 +3,11 @@ name: Concurrent CI Pipeline-v
 on:
   push:
     branches:
-     - vinayashree
+      - vinayashree
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint:
@@ -14,10 +18,8 @@ jobs:
       - name: Run linter
         run: |
           echo "Running linter..."
-          sleep 5  # Simulate linting
+          sleep 5
           echo "Linting complete."
-
-
 
   build:
     name: Build Application
@@ -27,7 +29,7 @@ jobs:
       - name: Build
         run: |
           echo "Building application..."
-          sleep 8  # Simulate build
+          sleep 8
           echo "Build complete."
 
   package:
@@ -39,7 +41,7 @@ jobs:
       - name: Package
         run: |
           echo "Packaging artifacts..."
-          sleep 6  # Simulate packaging
+          sleep 6
           echo "Packaging complete."
 
   deploy:
@@ -51,5 +53,6 @@ jobs:
       - name: Deploy
         run: |
           echo "Deploying to staging..."
-          sleep 5  # Simulate deployment
+          sleep 5
           echo "Deployment complete."
+
