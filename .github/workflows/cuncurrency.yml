@@ -1,20 +1,54 @@
-name: Build and Deploy-vina
+
+name: Concurrent CI Pipeline5
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
-concurrency:
+concurrency: 
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run build
-        run: echo "Building project..."
+      - uses: actions/checkout@v4
+      - name: Run linter
+        run: |
+          echo "Running linter..."
+          sleep 5
+          echo "Linting complete."
+  build:
+    name: Build Application
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          echo "Building application..."
+          sleep 8
+          echo "Build complete."
+  package:
+    name: Package Artifacts
+    runs-on: ubuntu-22.04
+    needs: [lint, build]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package
+        run: |
+          echo "Packaging artifacts..."
+          sleep 6
+          echo "Packaging complete."
+  deploy:
+    name: Deploy to Staging
+    runs-on: ubuntu-22.04
+    needs: package
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy
+        run: |
+          echo "Deploying to staging..."
+          sleep 5
+          echo "Deployment complete."
